@@ -15,9 +15,9 @@ module.exports = ( options, cb ) ->
 	throw "unable to parse file" if err
 	options.replace = options?.replace or []
 
-	blog  = input?.channel?.link
-	posts = input?.channel?.item
+	posts = input?.rss?.channel[0].item
 
+	#console.log JSON.stringify(input?.rss?.channel, 0, 2)[0..1000]
 	if not posts
 		throw "there are no posts in this input file"
 
@@ -25,7 +25,7 @@ module.exports = ( options, cb ) ->
 	
 	for post in posts
 		#get the target folder
-		name = post["wp:post_name"]
+		name = post["wp:post_name"][0]
 		postDir = path.join options.output, name
 
 		console.log "exporting #{name}"
@@ -53,7 +53,7 @@ module.exports = ( options, cb ) ->
 				console.log "unable to get html file info for #{name}"
 				continue
 
-		data = post["content:encoded"]
+		data = post["content:encoded"][0]
 		
 		#curate content from non-html tags.
 		data = data?.replace /\[caption.*?\]/g, ""

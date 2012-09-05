@@ -4,7 +4,7 @@
   "description": "Import word press posts into the blogo format.",
   "version": "0.0.0",
   "dependencies": {
-    "node-xml2js":"0.1.14",
+    "xml2js":"0.2.0",
     "iced-coffee-script":"1.3.3e",
     "colors":"*"
   },
